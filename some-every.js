@@ -12,7 +12,7 @@ function hasOddNumber(arr) {
         function(num){
             return (num % 2 !== 0);
         }
-    )
+    );
 }
 
 /*
@@ -24,7 +24,14 @@ Examples:
     hasAZero(1212121) // false
 */
 
-function hasAZero(num) {}
+function hasAZero(num) {
+    numAsArr = Array.from(num.toString());
+    return numAsArr.some(
+        function(numStr){
+            return numStr === '0';
+        }
+    );
+}
 
 /*
 Write a function called hasOnlyOddNumbers which accepts an array and returns true if every single number
@@ -35,20 +42,48 @@ Examples:
     hasOnlyOddNumbers([1,2,3,5,7]) // false
 */
 
-function hasOnlyOddNumbers(arr) {}
+function hasOnlyOddNumbers(arr) {
+    return arr.every(
+        function(num){
+            return (num % 2 !== 0);
+        }
+    );
+}
 
 /*
-Write a function called hasNoDuplicates which accepts an array and returns true if there are no duplicate values (more than one element in the array that has the same value as another). If there are any duplicates, the function should return false.
+Write a function called hasNoDuplicates which accepts an array and returns true if there are
+no duplicate values (more than one element in the array that has the same value as another)
+If there are any duplicates, the function should return false.
 
 Examples:
     hasNoDuplicates([1,2,3,1]) // false
     hasNoDuplicates([1,2,3]) // true
 */
 
-function hasNoDuplicates(arr) {}
+function hasNoDuplicates(arr) {
+    const arrMem = [];
+    return arr.every(
+        function(elem){
+            if (arrMem.indexOf(elem) === -1){
+                arrMem.push(elem)
+                return true;
+            } else {
+                return false;
+            }
+        }
+    );
+    // const arrSet = new Set(arr);
+    // console.log(arrSet, arr);
+    // if (arrSet.size === arr.length){
+    //     return true;
+    // } else {
+    //     return false;   
+    // }
+}
 
 /*
-Write a function called hasCertainKey which accepts an array of objects and a key, and returns true if every single object in the array contains that key. Otherwise it should return false.
+Write a function called hasCertainKey which accepts an array of objects and a key, and returns
+true if every single object in the array contains that key. Otherwise it should return false.
 
 Examples:
     var arr = [
@@ -62,10 +97,17 @@ Examples:
     hasCertainKey(arr,'isCatOwner') // false
 */
 
-function hasCertainKey(arr, key) {}
+function hasCertainKey(arr, key) {
+    return arr.every(
+        function(obj){
+            return (obj[key] !== undefined);
+        }
+    );
+}
 
 /*
-Write a function called hasCertainValue which accepts an array of objects and a key, and a value, and returns true if every single object in the array contains that value for the specific key. Otherwise it should return false.
+Write a function called hasCertainValue which accepts an array of objects and a key, and a value, and returns
+true if every single object in the array contains that value for the specific key. Otherwise it should return false.
 
 Examples:
     var arr = [
@@ -73,11 +115,17 @@ Examples:
         {title: "Instructor", first: 'Tim', last:"Garcia", isCatOwner: true}, 
         {title: "Instructor", first: 'Matt', last:"Lane"}, 
         {title: "Instructor", first: 'Colt', last:"Steele", isCatOwner: true}
-    ]
+    ]   
     
     hasCertainValue(arr,'title','Instructor') // true
     hasCertainValue(arr,'first','Elie') // false
     
 */
 
-function hasCertainValue(arr, key, searchValue) {}
+function hasCertainValue(arr, key, searchValue) {
+    return arr.every(
+        function(obj){
+            return (obj[key] === searchValue);
+        }
+    );
+}
